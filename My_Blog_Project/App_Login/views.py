@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from App_Login.forms import SignUpForm
+from App_Login.forms import SignUpForm, UserProfileChange
 # Create your views here.
 
 def sign_up(request):
@@ -41,3 +41,29 @@ def logout_user(request):
 @login_required
 def login_profile(request):
     return render(request,'App_Login/profile.html',context={})
+
+@login_required
+def user_change(request):
+    current_user = request.user
+    form = UserProfileChange(instance=current_user)
+    if request.method == 'POST':
+        form = UserProfileChange(request.POST, instance=current_user)
+        if form.is_valid():
+            form.save()
+            form = UserProfileChange(instance=current_user)
+            
+    return render(request, 'App_Login/change_user.html', context={'form':form})
+    
+@login_required
+def pass_change(request):
+    current_user = request.user
+    form = PasswordChangeForm(current_user)
+    changed = False
+    if request.method == 'POST':
+        form = PasswordChangeForm(current_user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            changed = True
+    return render(request, 'App_Login/pass_change.html',
+                  context = {'form':form,'changed':changed})
+        

@@ -11,5 +11,8 @@
   <p>Email: {{ user.email }}</p>
   <p>First Name: {{ user.first_name }}</p>
   <p>Last Name: {{ user.last_name }}</p>
+
+  <br>
+  <a href="{% url 'App_Login:user_change' %}" class="btn btn-warning btn-sm">Change Profile Info </a>
   
 {% endblock body_block %}
