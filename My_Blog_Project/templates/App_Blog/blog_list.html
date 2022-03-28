@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}
-  Home
-{% endblock title %}
+{% block title %}Home{% endblock title %}
 
 {% block body_block %}
-  <h1>I am a Blog List Home Page</h1>
+  {% for blog in blogs %}
+    <h2>{{ blog.blog_title }}</h2>
+    <h6>{{ blog.publish_date }}</h6>  
+  {% endfor %}
+  
 {% endblock body_block %}
