@@ -25,7 +25,7 @@
             </li>
           {% if user.is_authenticated %}
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'App_Login:logout' %}">Logout</a>
+              <a class="nav-link" href="{% url 'App_Blog:create_blog' %}">Write Blog</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'App_Login:profile' %}">Profile</a>
