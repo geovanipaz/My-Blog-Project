@@ -29,6 +29,9 @@ class Comment(models.Model):
     comment = models.TextField()
     comment_date = models.DateTimeField(auto_now_add=True)
     
+    def __str__(self) -> str:
+        return self.comment
+    
     class Meta:
         ordering = ['-comment_date']
 class Likes(models.Model):
