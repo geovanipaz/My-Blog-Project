@@ -1,4 +1,5 @@
 from dataclasses import fields
+from multiprocessing import context
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView, DetailView,\
     TemplateView, DeleteView
@@ -32,3 +33,10 @@ class CreateBlog(CreateView, LoginRequiredMixin):
         blog_obg.slug = title.replace(" ","-")+ "-" +str(uuid.uuid4())
         blog_obg.save()
         return HttpResponseRedirect(reverse('index'))
+    
+    
+def blog_details(request, slug):
+    blog = Blog.objects.get(slug=slug)
+    
+    return render(request, 'App_Blog/blog_details.html',
+                  context={'blog':blog})
