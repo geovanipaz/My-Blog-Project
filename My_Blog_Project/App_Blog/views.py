@@ -11,9 +11,8 @@ from .forms import CommentForm
 import uuid
 # Create your views here.
 
-def blog_list(request):
-    dict = {}
-    return render(request, 'App_Blog/blog_list.html', context=dict)
+class MyBlogs(TemplateView, LoginRequiredMixin):
+    template_name = 'App_Blog/my_blogs.html'
 
 class BlogList(ListView):
     context_object_name = 'blogs'

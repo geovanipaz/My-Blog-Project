@@ -10,4 +10,5 @@ urlpatterns = [
     path('details/<slug>', views.blog_details, name='details_blog'),
     path('liked/<pk>', views.liked, name='liked_post'),
     path('unliked/<pk>', views.unliked, name='unliked_post'),
+    path('my-blog/', views.MyBlogs.as_view(), name='my_blogs'),
 ]
