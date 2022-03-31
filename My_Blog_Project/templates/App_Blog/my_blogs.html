@@ -21,5 +21,8 @@
           {{ blog.blog_comment.count }} Comments</h6>
       </div>
     </div>
+    <hr>
+    <a href="{% url 'App_Blog:edit_blog' pk=blog.pk %}" 
+    class="btn btn-info btn-sm">Edit</a>
   {% endfor %}
 {% endblock body_block %}

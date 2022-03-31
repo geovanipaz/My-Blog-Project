@@ -14,6 +14,16 @@ import uuid
 class MyBlogs(TemplateView, LoginRequiredMixin):
     template_name = 'App_Blog/my_blogs.html'
 
+
+class UpdateBlog(UpdateView, LoginRequiredMixin):
+    model = Blog
+    fields = ('blog_title', 'blog_content','blog_image')
+    template_name = 'App_Blog/edit_blog.html'
+    
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('App_Blog:details_blog', 
+                            kwargs={'slug':self.object.slug})
+
 class BlogList(ListView):
     context_object_name = 'blogs'
     model = Blog
